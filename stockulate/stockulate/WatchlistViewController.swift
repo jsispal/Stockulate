@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class WatchlistViewController: UIViewController {
 
@@ -24,12 +25,18 @@ class WatchlistViewController: UIViewController {
     
     func initView(){
         self.navigationItem.title = "Watchlist";
+        
+        retrieveStockDetails()
+    }
+    
+    func retrieveStockDetails(){
+        Alamofire.request(.GET, "https://api.stocktwits.com/api/2/search/symbols.json?q=FB").responseJSON { response in
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
+            }
+        }
     }
     
     
-    
-    
-
-
 }
 
